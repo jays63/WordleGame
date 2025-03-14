@@ -3,6 +3,6 @@ public class Setup {
     private char[][] guesses;
 
     public Setup(){
-        W
+        guesses=new char[6][5];
     }
 }
