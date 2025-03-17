@@ -6,11 +6,8 @@ import java.util.Scanner;
 public class Setup {
     private ArrayList<String> wordList;
     private String word;
-    private char[][] guesses;
 
-    public Setup(){
-        guesses=new char[6][5];
-    }
+    public Setup(){}
 
     public void setWORD(){
         wordList =new ArrayList<>();
