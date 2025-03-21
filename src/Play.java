@@ -8,7 +8,7 @@ public class Play {
     private Scanner sc;
     private ArrayList<String> validWords;
     private int guess;
-    private char[] ansAsArr;
+    private ArrayList<Character> ansAsArr;
     private final String ANSI_RESET = "\u001B[0m";
     private final String ANSI_BLACK_BACKGROUND = "\\u001B[40m";
     private final String ANSI_YELLOW_BACKGROUND = "\\u001B[43m";
@@ -34,7 +34,7 @@ public class Play {
         }
         guess=0;
         for (int i = 0; i < game.getAnswer().length(); i++) {
-            ansAsArr[i]=game.getAnswer().charAt(i);
+            ansAsArr.add(game.getAnswer().charAt(i));
         }
     }
 
@@ -67,9 +67,15 @@ public class Play {
 
     public void colorLetters(){
         for (int i = 0; i < chars[0].length; i++) {
-            if (chars[guess][i]==(ansAsArr[i])){
+            if (chars[guess][i]==(ansAsArr.indexOf(i))){
                 String green=ANSI_GREEN_BACKGROUND+chars[guess][i]+ANSI_RESET;
                 chars[guess][i]=green.charAt(0);
+            } else if (ansAsArr.contains(chars[guess][i])) {
+                String yellow =ANSI_YELLOW_BACKGROUND+chars[guess][i]+ANSI_RESET;
+                chars[guess][i]= yellow.charAt(0);
+            } else {
+                String black =ANSI_BLACK_BACKGROUND+chars[guess][i]+ANSI_RESET;
+                chars[guess][i]= black.charAt(0);
             }
         }
     }
