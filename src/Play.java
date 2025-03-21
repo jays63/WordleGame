@@ -8,7 +8,7 @@ public class Play {
     private Scanner sc;
     private ArrayList<String> validWords;
     private int guess;
-    private ArrayList<Character> ansAsArr;
+    private ArrayList<Character> ansAsArr=new ArrayList<>();
     private final String ANSI_RESET = "\u001B[0m";
     private final String ANSI_BLACK_BACKGROUND = "\\u001B[40m";
     private final String ANSI_YELLOW_BACKGROUND = "\\u001B[43m";

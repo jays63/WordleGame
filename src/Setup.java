@@ -7,7 +7,9 @@ public class Setup {
     private ArrayList<String> wordList;
     private String answer;
 
-    public Setup(){}
+    public Setup(){
+        setWORD();
+    }
 
     public void setWORD(){
         wordList =new ArrayList<>();
