@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Setup {
     private ArrayList<String> wordList;
-    private String word;
+    private String answer;
 
     public Setup(){}
 
@@ -17,13 +17,13 @@ public class Setup {
             while (sc.hasNext()){
                 wordList.add(sc.nextLine());
             }
-            word =wordList.get((int)(Math.random()*wordList.size()));
+            answer=wordList.get((int)(Math.random()*wordList.size()));
         } catch (IOException exception){
             System.out.println(exception.getMessage());
         }
     }
 
-    public String getWord(){
-        return word;
+    public String getAnswer(){
+        return answer;
     }
 }
