@@ -36,9 +36,10 @@ public class Play {
         for (int i = 0; i < game.getAnswer().length(); i++) {
             ansAsArr.add(game.getAnswer().charAt(i));
         }
+        guess();
     }
 
-    public void guess(){
+    private void guess(){
         if (guess==6){
             System.out.println("You have lost the game! The correct word was "+game.getAnswer());
             System.exit(0);
@@ -63,6 +64,7 @@ public class Play {
         }
         guess++;
         colorLetters();
+        guess();
     }
 
     public void colorLetters(){
