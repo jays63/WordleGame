@@ -3,11 +3,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Setup {
+public class WordSelect {
     private ArrayList<String> wordList;
     private String answer;
 
-    public Setup(){
+    public WordSelect(){
         setWORD();
     }
 

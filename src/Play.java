@@ -3,19 +3,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Play {
-    private Setup game;
-    private char[][] chars=new char[6][5];
+    private WordSelect game;
+    private String[][] chars=new String[6][5];
     private Scanner sc;
     private ArrayList<String> validWords;
     private int guess;
     private ArrayList<Character> ansAsArr=new ArrayList<>();
     private final String ANSI_RESET = "\u001B[0m";
-    private final String ANSI_BLACK_BACKGROUND = "\\u001B[40m";
-    private final String ANSI_YELLOW_BACKGROUND = "\\u001B[43m";
-    private final String ANSI_GREEN_BACKGROUND = "\\u001B[42m";
+    private final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    private final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    private final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
 
     public Play(){
-        game=new Setup();
+        game=new WordSelect();
         for (int i = 0; i < chars.length; i++) {
             for (int j = 0; j < chars[0].length; j++) {
                 chars[i][j]='_';
@@ -67,18 +67,10 @@ public class Play {
         guess();
     }
 
-    public void colorLetters(){
+    private void colorLetters(){
+//      If the letter is right, give it a green background and add it to the array. If wrong place, yellow. Otherwise, black.
         for (int i = 0; i < chars[0].length; i++) {
-            if (chars[guess][i]==(ansAsArr.indexOf(i))){
-                String green=ANSI_GREEN_BACKGROUND+chars[guess][i]+ANSI_RESET;
-                chars[guess][i]=green.charAt(0);
-            } else if (ansAsArr.contains(chars[guess][i])) {
-                String yellow =ANSI_YELLOW_BACKGROUND+chars[guess][i]+ANSI_RESET;
-                chars[guess][i]= yellow.charAt(0);
-            } else {
-                String black =ANSI_BLACK_BACKGROUND+chars[guess][i]+ANSI_RESET;
-                chars[guess][i]= black.charAt(0);
-            }
+
         }
     }
 }
