@@ -8,7 +8,6 @@ public class Play {
     private Scanner sc;
     private ArrayList<String> validWords;
     private int guess;
-    private ArrayList<Character> ansAsArr=new ArrayList<>();
     private final String ANSI_RESET = "\u001B[0m";
     private final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     private final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
@@ -18,7 +17,7 @@ public class Play {
         game=new WordSelect();
         for (int i = 0; i < chars.length; i++) {
             for (int j = 0; j < chars[0].length; j++) {
-                chars[i][j]='_';
+                chars[i][j]="_";
             }
         }
         sc=new Scanner(System.in);
@@ -33,9 +32,6 @@ public class Play {
             System.out.println(exception.getMessage());
         }
         guess=0;
-        for (int i = 0; i < game.getAnswer().length(); i++) {
-            ansAsArr.add(game.getAnswer().charAt(i));
-        }
         guess();
     }
 
@@ -59,18 +55,18 @@ public class Play {
                 valid=true;
             else System.out.println("Not an accepted word.");
         }
-        for (int i = 0; i < chars[0].length; i++) {
-            chars[guess][i]=ans.charAt(i);
-        }
         guess++;
-        colorLetters();
+        colorLetters(ans);
         guess();
     }
 
-    private void colorLetters(){
+    private void colorLetters(String ans){
 //      If the letter is right, give it a green background and add it to the array. If wrong place, yellow. Otherwise, black.
-        for (int i = 0; i < chars[0].length; i++) {
-
+        for (int i = 0; i < ans.length(); i++) {
+            if (chars[guess][i].equals(ans.substring(i, i+1))){
+                String green=ANSI_GREEN_BACKGROUND+chars[guess][i]+ANSI_RESET;
+                chars[guess][i]=green;
+            }
         }
     }
 }
