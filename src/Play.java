@@ -36,15 +36,15 @@ public class Play {
     }
 
     private void guess(){
-        if (guess==6){
-            System.out.println("You have lost the game! The correct word was "+game.getAnswer());
-            System.exit(0);
-        }
         for (int i = 0; i < chars.length; i++) {
             for (int j = 0; j < chars[0].length; j++) {
                 System.out.print(chars[i][j]);
             }
             System.out.println();
+        }
+        if (this.guess==6){
+            System.out.println("You have lost the game! The correct word was "+game.getAnswer());
+            System.exit(0);
         }
         boolean valid=false;
         String ans="";
@@ -55,17 +55,36 @@ public class Play {
                 valid=true;
             else System.out.println("Not an accepted word.");
         }
-        guess++;
+        for (int i = 0; i < chars[guess].length; i++) {
+            chars[guess][i]=ans.substring(i, i+1);
+        }
         colorLetters(ans);
+        guess++;
+        if (ans.equals(game.getAnswer())){
+            for (int i = 0; i < chars.length; i++) {
+                for (int j = 0; j < chars[0].length; j++) {
+                    System.out.print(chars[i][j]);
+                }
+                System.out.println();
+            }
+            System.out.println("Congratulations, you won in "+guess+" guesses!");
+            System.exit(0);
+        }
         guess();
     }
 
     private void colorLetters(String ans){
 //      If the letter is right, give it a green background and add it to the array. If wrong place, yellow. Otherwise, black.
         for (int i = 0; i < ans.length(); i++) {
-            if (chars[guess][i].equals(ans.substring(i, i+1))){
+            if (chars[guess][i].equals(game.getAnswer().substring(i, i+1))){
                 String green=ANSI_GREEN_BACKGROUND+chars[guess][i]+ANSI_RESET;
                 chars[guess][i]=green;
+            } else if (game.getAnswer().contains(chars[guess][i])) {
+                String yellow=ANSI_YELLOW_BACKGROUND+chars[guess][i]+ANSI_RESET;
+                chars[guess][i]=yellow;
+            } else {
+                String black=ANSI_BLACK_BACKGROUND+chars[guess][i]+ANSI_RESET;
+                chars[guess][i]=black;
             }
         }
     }
