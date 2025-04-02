@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Play {
+public abstract class WordleBase {
     private WordSelect game;
     private String[][] chars=new String[6][5];
     private Scanner sc;
@@ -13,7 +13,7 @@ public class Play {
     private final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     private final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
 
-    public Play(){
+    public WordleBase(){
         game=new WordSelect();
         for (int i = 0; i < chars.length; i++) {
             for (int j = 0; j < chars[0].length; j++) {
@@ -35,7 +35,7 @@ public class Play {
         guess();
     }
 
-    private void guess(){
+    public void guess(){
         for (int i = 0; i < chars.length; i++) {
             for (int j = 0; j < chars[0].length; j++) {
                 System.out.print(chars[i][j]);
@@ -73,8 +73,7 @@ public class Play {
         guess();
     }
 
-    private void colorLetters(String ans){
-//      If the letter is right, give it a green background and add it to the array. If wrong place, yellow. Otherwise, black.
+    public void colorLetters(String ans){
         for (int i = 0; i < ans.length(); i++) {
             if (chars[guess][i].equals(game.getAnswer().substring(i, i+1))){
                 String green=ANSI_GREEN_BACKGROUND+chars[guess][i]+ANSI_RESET;
@@ -87,5 +86,9 @@ public class Play {
                 chars[guess][i]=black;
             }
         }
+    }
+
+    public void setCharsIdx(int col, String input){
+        chars[guess][col]=input;
     }
 }
