@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public abstract class WordleBase {
     private WordSelect game;
-    private String[][] chars=new String[6][5];
+    private Letter[][] chars=new Letter[6][5];
     private Scanner sc;
     private ArrayList<String> validWords;
     private int guess;
@@ -17,7 +17,7 @@ public abstract class WordleBase {
         game=new WordSelect();
         for (int i = 0; i < chars.length; i++) {
             for (int j = 0; j < chars[0].length; j++) {
-                chars[i][j]="_";
+                chars[i][j]=new Letter("_");
             }
         }
         sc=new Scanner(System.in);
@@ -56,7 +56,7 @@ public abstract class WordleBase {
             else System.out.println("Not an accepted word.");
         }
         for (int i = 0; i < chars[guess].length; i++) {
-            chars[guess][i]=ans.substring(i, i+1);
+            chars[guess][i]=new Letter(ans.substring(i, i+1));
         }
         colorLetters(ans);
         guess++;
@@ -76,19 +76,15 @@ public abstract class WordleBase {
     public void colorLetters(String ans){
         for (int i = 0; i < ans.length(); i++) {
             if (chars[guess][i].equals(game.getAnswer().substring(i, i+1))){
-                String green=ANSI_GREEN_BACKGROUND+chars[guess][i]+ANSI_RESET;
-                chars[guess][i]=green;
-            } else if (game.getAnswer().contains(chars[guess][i])) {
-                String yellow=ANSI_YELLOW_BACKGROUND+chars[guess][i]+ANSI_RESET;
-                chars[guess][i]=yellow;
+                Letter x=new GreenLetter(chars[guess][i].getLetter());
+                chars[guess][i]=x;
+            } else if (game.getAnswer().contains(chars[guess][i].getLetter())) {
+                Letter x=new YellowLetter(chars[guess][i].getLetter());
+                chars[guess][i]=x;
             } else {
-                String black=ANSI_BLACK_BACKGROUND+chars[guess][i]+ANSI_RESET;
-                chars[guess][i]=black;
+                Letter x=new BlackLetter(chars[guess][i].getLetter());
+                chars[guess][i]=x;
             }
         }
-    }
-
-    public void setCharsIdx(int col, String input){
-        chars[guess][col]=input;
     }
 }
