@@ -75,16 +75,20 @@ public abstract class WordleBase {
 
     public void colorLetters(String ans){
         for (int i = 0; i < ans.length(); i++) {
-            if (chars[guess][i].equals(game.getAnswer().substring(i, i+1))){
-                Letter x=new GreenLetter(chars[guess][i].getLetter());
+            if (chars[guess][i].toString().equals(game.getAnswer().substring(i, i+1))){
+                Letter x=new GreenLetter(chars[guess][i].toString());
                 chars[guess][i]=x;
-            } else if (game.getAnswer().contains(chars[guess][i].getLetter())) {
-                Letter x=new YellowLetter(chars[guess][i].getLetter());
+            } else if (game.getAnswer().contains(chars[guess][i].toString())) {
+                Letter x=new YellowLetter(chars[guess][i].toString());
                 chars[guess][i]=x;
             } else {
-                Letter x=new BlackLetter(chars[guess][i].getLetter());
+                Letter x=new RedLetter(chars[guess][i].toString());
                 chars[guess][i]=x;
             }
         }
+    }
+
+    public void setCharsIdx(int col, String replace){
+        chars[guess][col]=new Letter(replace);
     }
 }
