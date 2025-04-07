@@ -73,6 +73,7 @@ public abstract class WordleBase {
         guess();
     }
 
+    // https://www.geeksforgeeks.org/how-to-print-colored-text-in-java-console/?ref=gcse_outind was used for text colors
     public void colorLetters(String ans){
         for (int i = 0; i < ans.length(); i++) {
             if (chars[guess][i].toString().equals(game.getAnswer().substring(i, i+1))){
